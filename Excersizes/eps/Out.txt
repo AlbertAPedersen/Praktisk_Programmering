@@ -1,0 +1,24 @@
+Task 1: calculated  eps      float eps=1.19209e-07
+     double eps=2.22045e-16
+long double eps=1.0842e-19
+System eps 
+1.19209e-07
+2.22045e-16
+1.0842e-19
+Tests
+pow(2,-52):  2.22045e-16
+pow(2,-23):  1.19209e-07
+Task 2: 
+a==b ? false
+a>1  ? false
+b>1  ? true
+       tiny=0.00000000000000011
+1+tiny+tiny=1.00000000000000000
+tiny+tiny+1=1.00000000000000022
+As tiny+tiny=eps the operation tiny+tiny+1 gives 1+eps.The operation 1+tinygives 1 and is followed by the identical operation giving 1 again. 
+Task 3: 
+d1==d2? false
+d1=0.79999999999999993
+d2=0.80000000000000004
+Actual task: 
+approx(d1,d2) = 1

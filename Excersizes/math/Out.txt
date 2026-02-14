@@ -1,0 +1,33 @@
+Task 1:
+sqrt(2)=1.41421
+2^(1/5)=1.1487
+e^(pi)=23.1407
+pi^e=22.4592
+log(I)=(0,1.5708)
+   I^I=(0.20788,0)
+   π^I=(0.413292,0.910598)
+   E^I=(0.540302,0.841471)
+Task 2:
+sfuns::fgamma(0)=inf         std::tgamma(0)=inf         
+sfuns::fgamma(1)=1           std::tgamma(1)=1           
+sfuns::fgamma(2)=1           std::tgamma(2)=1           
+sfuns::fgamma(3)=2           std::tgamma(3)=2           
+sfuns::fgamma(4)=6           std::tgamma(4)=6           
+sfuns::fgamma(5)=24          std::tgamma(5)=24          
+sfuns::fgamma(6)=120         std::tgamma(6)=120         
+sfuns::fgamma(7)=720         std::tgamma(7)=720         
+sfuns::fgamma(8)=5040        std::tgamma(8)=5040        
+sfuns::fgamma(9)=40320       std::tgamma(9)=40320       
+sfuns::fgamma(10)=362880      std::tgamma(10)=362880      
+Task 3:
+sfuns::lngamma(0)=nan         std::lgamma(0)=inf         
+sfuns::lngamma(1)=-1.09351e-08std::lgamma(1)=0           
+sfuns::lngamma(2)=-1.09351e-08std::lgamma(2)=0           
+sfuns::lngamma(3)=0.693147    std::lgamma(3)=0.693147    
+sfuns::lngamma(4)=1.79176     std::lgamma(4)=1.79176     
+sfuns::lngamma(5)=3.17805     std::lgamma(5)=3.17805     
+sfuns::lngamma(6)=4.78749     std::lgamma(6)=4.78749     
+sfuns::lngamma(7)=6.57925     std::lgamma(7)=6.57925     
+sfuns::lngamma(8)=8.52516     std::lgamma(8)=8.52516     
+sfuns::lngamma(9)=10.6046     std::lgamma(9)=10.6046     
+sfuns::lngamma(10)=12.8018     std::lgamma(10)=12.8018     
