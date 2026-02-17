@@ -1,0 +1,10 @@
+set terminal svg
+set output "fig1.svg"
+set xlabel "x"
+set ylabel "y"
+
+set key out
+set tics out
+
+plot [-3:3] erf(x)\
+    ,"erf.data" using 1:2 with points pointtype 5 title "erf from cmath"
