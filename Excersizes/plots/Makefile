@@ -17,7 +17,7 @@ cgamma.svg: all.data Makefile
 	set output "$@"; \
 	set key off; \
 	set ticslevel 0; \
-	set view 70, 330; \
+	set view 70, 345; \
 	set zrange [0:6] ;\
 	set pm3d; \
 	set palette viridis;\
