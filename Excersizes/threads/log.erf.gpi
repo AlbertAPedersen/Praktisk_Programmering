@@ -1,0 +1,8 @@
+\
+set terminal svg background "white";\
+set terminal svg ;\
+set title "CPU times 12 logical processors";\
+set output "threads.svg" ;\
+plot "out.times" index 0 using 1:2 with linespoints title "Elapsed time",\
+ 	 "out.times" index 0 using 1:3 with linespoints title "Total CPU work";\
+
