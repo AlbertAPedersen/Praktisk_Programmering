@@ -1,38 +1,83 @@
 #include<iomanip>
 #include<iostream>
 #include<thread>
-#include"main.h"
 #include<vector>
+#include"matrix.h"
+
+int main(int argc, char **argv) {
+/*
+Task A 
+*/
+    std::cout<< "Task A2"<<"\n";
+
+    pp::matrix A2=pp::randommatrix(10,4);
+
+    A2.print("Matrix A");
+
+    //Decomposing to QR
+    pp::QR decomp2(A2); 
+    pp::matrix Q2=decomp2.Q;
+    pp::matrix R2=decomp2.R;
+    Q2.print("Matrix Q:");
+    R2.print("Matrix R:");
+    //test transpose QtQ=1
+    pp::matrix QtQ2=Q2.transpose()*Q2;
+    //QtQ.print("QtQ");
 
 
-int main(int argc, char** argv) {
-    long nthreads = 1, nterms = (int)1e8; /* default values */
-        for(int i=0;i<argc;i++) {
-            std::string arg = argv[i];
-            if(arg=="-nthreads" && i+1<argc) nthreads=std::stoi(argv[i+1]);
-            if(arg=="-nterms" && i+1<argc) nterms=static_cast<int>(std::stod(argv[i+1]));
-        }
+    pp::matrix I2 = QtQ2;
+    I2.setid();
+    //I4.print();
 
-    //data objects for each thread
-    std::vector<harm::data> params(nthreads);
-    for(int i=0;i<nthreads;i++) {
-        params[i].a = 1 + nterms/nthreads*i;
-        params[i].b = 1 + nterms/nthreads*(i+1);
-    }
-    params[params.size()-1].b=nterms+1; /* the enpoint might need adjustment */    
+    //Running tests with approx
+    std::cout<< "approx(Q*R,A) returns "<< pp::approx(Q2*R2,A2) <<"\n";
+
+    std::cout<< "approx(I4,QtQ) returns "<< pp::approx(I2,QtQ2) <<"\n";
 
 
-    //prepare threads
-    std::vector<std::thread> threads;
-    threads.reserve(nthreads); // reserve empty slots for our threads
+    std::cout<< "Task A3 with 7x7" <<"\n";
 
-    for(int i=0;i<nthreads;i++) {
-        threads.emplace_back(harm::harm,std::ref(params[i]));
-   }
+    pp::matrix A3 = pp::randommatrix(7,7);
+    pp::vector b3 = pp::randomvec(7);
+    pp::QR decomp3(A3);
+    pp::matrix Q3=decomp3.Q;
+    pp::matrix R3=decomp3.R;
 
-   //join threads (wait for operations to be done)
-   for(auto &thread : threads) thread.join();
-   //total sum
-   double total=0; for(const auto &p : params){total+=p.sum;}
-    return 0;
+    pp::vector x3=decomp3.solve(b3);
+
+    std::cout<< "approx(b, A*x) returns "<<pp::approx(b3,A3*x3)<<"\n";
+    //R3.print();
+
+    std::cout<< "Task A4" <<"\n";
+    std::cout<< "Det(R) returns" << decomp3.det() << "\n";
+
+/*
+Task B
+Uses same square matrix as A3 for the inverse (7x7)
+*/
+    std::cout<< "Task B"<<"\n";
+    
+    pp::matrix A3_inv = decomp3.inverse();
+
+    pp::matrix prod = A3_inv*A3;
+    pp::matrix I7(7,7);
+    I7.setid();
+    prod.print();
+    std::cout<< "approx(I7,A3_inv*A3) returns " << pp::approx(I7,A3_inv*A3) << "\n";
+
+
+/*
+Task C
+*/
+
+for(int i=0; i<argc;i++){
+    int N=1;
+    std::string arg=argv[i];
+    if (arg=="-size") N=std::stoi(argv[i+1]);
+    
+    pp::matrix A=pp::randommatrix(N,N);
+    pp::QR datum(A);
+}
+
+return 0;
 }

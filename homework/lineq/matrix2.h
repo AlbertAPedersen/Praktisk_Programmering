@@ -62,11 +62,15 @@ struct vector {
 		std::cout<<"\n";
 	}
 
-	vector map(std::function<double(double)> f) const{
-		vector r(size());
+	vector map(std::function<double(double)> f) const{ 
+		//Maps a function onto each scalar in the vector to make a new vector
+		//(squaring done by vector squared = v.map([] double x {return x*x;});)
+		vector New(size());
 		for(int i=0;i<size();i++)r.data[i]=f(data[i]);
-		return r;
+		return New;
 	}
+
+
 
 }; //vector
 
@@ -90,15 +94,17 @@ bool approx(const vector& a, const vector& b, double acc=1e-6, double eps=1e-6){
 	return true;
 	}
 
+	
+
 struct matrix {
 	std::vector<pp::vector> cols;
 	matrix()=default;
-	matrix(int n,int m) : cols(m, pp::vector(n)) {}
+	matrix(int n,int m) : cols(m, pp::vector(n)) {} //make a matrix of m std::vectors each containing a pp::vector that is n long.
 	matrix(const matrix& other)=default;
 	matrix(matrix&& other)=default;
 	matrix& operator=(const matrix& other)=default;
 	matrix& operator=(matrix&& other)=default;
-	int size1() const {return cols.empty() ? 0 : cols[0].size(); }
+	int size1() const {return cols.empty() ? 0 : cols[0].size(); } // ? is ternary operator (condition ? value_if_true : value_if_false)
 	int size2() const {return cols.size();}
 	double& operator()(int i, int j){return cols[j][i];}
 	double& operator[](int i, int j){return cols[j][i];}
@@ -106,7 +112,7 @@ struct matrix {
 	const double& operator[](int i, int j)const{return cols[j][i];}
 	vector& operator[](int i){return cols[i];}
 	const vector& operator[](int i) const {return cols[i];}
-//	void resize(int n, int m);
+	//	void resize(int n, int m);
 	void setid(){
 		if(size1()!=size2())throw std::runtime_error("non-square matrix\n");
 		for(int i=0;i<size1();i++){
@@ -122,12 +128,14 @@ struct matrix {
 		return R;
 	}
 
-//	matrix T() const;
+	//	matrix T() const;
 	
 	double get (int i, int j) {return cols[j][i];}
 	void set(int i, int j, double value){cols[j][i] = value;}
-//	vector get_col(int j);
-//	void set_col(int j,vector& cj);
+
+	vector get_col(int j) {return *this[j];}
+
+	void set_col(int j,vector& cj) {cols[j]=cj;}
 
 	matrix& operator+=(const matrix& B){
 		for(int i=0;i<size2();i++)(*this)[i]+=B[i];
@@ -145,8 +153,40 @@ struct matrix {
 		for(int i=0;i<size2();i++)(*this)[i]/=c;
 		return *this;
 		}
-	matrix& operator*=(const matrix&);
-	matrix  operator^(int);
+	matrix& operator*=(const matrix& B){ 
+		//Uses a "Rank-1 update rather than sclar product method"
+		//For matrix of size m x n, multiply by n x p, resulting in m x p
+		int n = (*this).size2(); //Columns of A
+		int n2 = B.size1(); //nrows of B
+		if (n!=n2) throw std::invalid_argument("size mismatch");
+
+		//new matrix dimensions
+		int m = (*this).size1(); //nrows of A
+		int p = B.size2(); //ncols of B
+		matrix New(m,p); //empty matrix of size m,p
+
+		for (int k = 0; k < n ; k++){		//for columns in A, take column k
+		const vector& Acol = (*this)[k]; 
+			for (int j = 0 ; j < p ; j++){	//For columns in b, take scalar B[k,j]
+				double Bkj=B(k,j);
+			
+				for (int i = 0 ; i < m; i++){  //for rows in A / New, calculate scalar value 
+					New(i,j)+=Acol(i)*Bkj; // add Aik*Bkj
+				}
+			}
+		}
+		*this = std::move(New); 		
+		return *this
+	}
+
+	matrix  operator^(int ex){
+		New = setid(*this);
+		base = (*this);
+		for (int i=0;int<ex;i++){
+			New*=base;
+		}
+		return New
+	}
 
 	void print(std::string s="") const{
 		printf("%s\n",s.c_str());
@@ -168,14 +208,8 @@ matrix operator-(matrix A, const matrix& B){
 	}
 
 matrix operator*(const matrix& A, const matrix& B){
-	if(A.size2()!=B.size1()) throw std::invalid_argument("size mismatch");
-	matrix R(A.size1(),B.size2());
-	for(int k=0;k<A.size2();k++)
-	for(int j=0;j<B.size2();j++) {
-		double Bkj=B[k,j];
-		for(int i=0;i<A.size1();i++)R[i,j]+=A[i,k]*Bkj;
-		}
-	return R;
+	matrix New = A;
+	return New*=B;
 	}
 
 matrix operator*(matrix A, const double c){
