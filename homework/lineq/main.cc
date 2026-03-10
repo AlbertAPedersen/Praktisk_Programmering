@@ -2,7 +2,7 @@
 #include<iostream>
 #include<thread>
 #include<vector>
-#include"matrix.h"
+#include"matrix_QR.h"
 
 int main(int argc, char **argv) {
 /*
@@ -70,14 +70,14 @@ Uses same square matrix as A3 for the inverse (7x7)
 Task C
 */
 
-for(int i=0; i<argc;i++){
-    int N=1;
-    std::string arg=argv[i];
-    if (arg=="-size") N=std::stoi(argv[i+1]);
-    
-    pp::matrix A=pp::randommatrix(N,N);
-    pp::QR datum(A);
-}
+    for(int i=0; i<argc;i++){
+        int N=1;
+        std::string arg=argv[i];
+        if (arg=="-size") N=std::stoi(argv[i+1]);
+        
+        pp::matrix A=pp::randommatrix(N,N);
+        pp::QR datum(A);
+    }
 
 return 0;
 }

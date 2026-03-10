@@ -28,16 +28,16 @@ out.txt : main
 
 times.txt : main
 	> $@
-	for N in $$(seq 100 100 2500); do \
+	for N in $$(seq 100 100 2200); do \
 		time --format "$$N %e" --output $@ --append \
-		./$< -size $$N 1>out 2>err ;\
+		./$< -size $$N 1>out ;\
 	done 
 
 
 main : main.o
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDLIBS)
 
-main.o : main.cc matrix.h Makefile
+main.o : main.cc matrix_QR.h Makefile
 	$(CXX) $(CXXFLAGS) -c main.cc -o main.o
 
 clean : 
