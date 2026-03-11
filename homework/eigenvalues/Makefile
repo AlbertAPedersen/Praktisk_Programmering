@@ -7,7 +7,7 @@ all : out.txt
 	cat out.txt
 
 out.txt : main
-	./main > $@
+	./main -rmax 5 -dr 0.3  > $@
 
 #times.txt : main\
 	> $@\
