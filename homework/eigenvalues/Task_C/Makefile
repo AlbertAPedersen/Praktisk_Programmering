@@ -7,11 +7,11 @@ Ns := $(shell seq 100 100 800)
 LOGS := $(Ns:%=log.%)
 
 
-all : outtimes.txt parallel.svg
+all : outtimes.txt scaling.svg
 
-parallel.svg: outtimes.txt parallel.gp
+scaling.svg: outtimes.txt scaling.gp
 #Silent fitting
-	@gnuplot parallel.gp > parallel.svg
+	@gnuplot scaling.gp > scaling.svg
 	
 
 benchmark:
@@ -40,4 +40,4 @@ main.o : main.cc $(packages) Makefile
 	$(CXX) $(CXXFLAGS) -c main.cc -o main.o
 
 clean : 
-	$(RM) main *.o outtimes.txt *.svg log* *.log
+	$(RM) main .o outtimes.txt *.svg log* *.log
