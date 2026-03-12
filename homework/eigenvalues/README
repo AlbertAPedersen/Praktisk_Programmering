@@ -1,0 +1,1 @@
+Jacobi.h contains the EVD class used in the task. Task A and B are completed in the folder Task_AB while C is made in Task_C as it runs using another Makefile.
