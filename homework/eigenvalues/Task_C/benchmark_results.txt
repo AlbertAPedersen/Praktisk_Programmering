@@ -1,0 +1,2 @@
+Single thread elapsed:23.29  User:24.19
+8 threads elapsed:12.63  User:27.85
