@@ -110,7 +110,7 @@ namespace pp{
         //Constructors
         std::vector<pp::vector> cols;
         matrix()=default;
-        matrix(int n,int m) : cols(m, pp::vector(n)) {} //make a matrix of m std::vectors each containing a pp::vector that is n long.
+        matrix(int m,int n) : cols(n, pp::vector(m)) {} //make a matrix of m std::vectors each containing a pp::vector that is n long.
         matrix(const matrix& other)=default;  //copy make
         matrix(matrix&& other)=default;        //move make
         matrix& operator=(const matrix& other)=default; //copy overwrite
@@ -316,6 +316,7 @@ namespace pp{
          //Constructors
          matrix Q, R;
          int m,n;
+        QR() : m(0), n(0){} //Default constructor
         QR(const matrix& A) : Q(A), R(A.size2(),A.size2()) {
             n=A.size2(); //A columns
             m=A.size1(); //A rows
@@ -339,22 +340,24 @@ namespace pp{
                 return prod;
             }
 
-            vector solve(const vector& b){ 
-                //for equation QRx=B find x by using QtQRx  = Rx  =  QtB. Backsubstitution as upper=right
-                if (b.size()!=m) throw std::runtime_error("Size =("+ std::to_string(b.size())+")!=size m"+std::to_string(m));
-                
-                // y=Q^t*B
-                    vector y=Q.transpose()*b;
-                    vector x(b.size());
+            vector backsubstute(const vector& b){
+                if (b.size()!=n) throw std::runtime_error("Size =("+ std::to_string(b.size())+")!=size m"+std::to_string(m));
+                vector x(b.size());
                     for (int i=n-1;i>=0;i--){
                         double sum=0;
-                        
                         for (int k=i+1;k<n;k++){
                             sum+=R(i,k)*x(k);
                         }
-                        x[i]=(y[i]-sum)/R(i,i);
+                        x[i]=(b[i]-sum)/R(i,i);
                     }
                 return x;
+            }
+            vector solve(const vector& b){ 
+                //for equation QRx=B find x by using QtQRx  = Rx  =  QtB. Backsubstitution as upper=right
+                // y=Q^t*B
+                    vector y=Q.transpose()*b;
+                    vector x=backsubstute(y);
+                    return x;
                 }
             
             matrix inverse(){
@@ -371,7 +374,20 @@ namespace pp{
                 }
                 return Ain;
             }
-                
+
+            matrix R_in(){
+                matrix R_inverse(n,n);
+                matrix I(n,n);
+                I.setid();
+                for(int i=0; i<I.size2();i++){
+                    R_inverse[i]=backsubstute(I[i]);
+                }
+                return R_inverse;
+            }
+            
+
+            
+        
             
         }; 
             

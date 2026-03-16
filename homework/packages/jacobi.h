@@ -90,7 +90,11 @@ struct EVD{
         return w;
     }
 
+    matrix covariance(){
 
+        cvarmatrix=R.inverse()*((R.inverse()).transpose());
+        return cvarmatrix;
+    }
 };//EVD struct
 
 }; //pp
