@@ -45,10 +45,12 @@ int main(){
 
     
     double halftime = std::log(2)/c[1];
+    double halftime_err = std::abs(halftime*std::sqrt(SIGMA[1,1])/c[1]);
     c.print("Coefficients");
-    std::cout<< "Measured halftime is: " << halftime << "Days. Actual value: 3.632 Days" ; 
 
-
+    std::cout<<"\n"<< "Measured halftime is: " << halftime << "+-" <<halftime_err 
+    << " Days.\nActual value: 3.632 Days. The result is off by " << (halftime-3.632)/halftime_err <<" standard deviations"; 
+    
     //output for plotting
     
     std::cout<< "\n\n\n"; // GNU block
