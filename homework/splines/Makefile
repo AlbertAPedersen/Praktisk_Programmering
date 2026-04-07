@@ -4,11 +4,14 @@ LDLIBS += -lstdc++ -lm #Links libraries that are already linked
 
 packages = ../packages/matrix_QR.h spline.h
 
-all : out.txt
+all : out.txt qspline.svg cspline.svg
 	cat out.txt
 
-#experiment.svg : out.txt experiment.gp
-#	gnuplot experiment.gp > experiment.svg	
+qspline.svg :  qspline.gp out.txt
+	gnuplot qspline.gp > qspline.svg
+
+cspline.svg :  cspline.gp out.txt
+	gnuplot cspline.gp > cspline.svg
 
 out.txt : main
 	./main > out.txt

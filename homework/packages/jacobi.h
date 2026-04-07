@@ -45,7 +45,7 @@ struct EVD{
         //Could probably also just check transpose
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
-                if (D(i,j)!=D(j,i)) throw std::runtime_error("Non-symmetric matrix for EVD\n");
+                if (D(i,j)!=D(j,i)) throw std::runtime_error("Non-symmetric matrix for EVD, maybe implement approx\n");
 
             }
         }

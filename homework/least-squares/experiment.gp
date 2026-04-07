@@ -4,7 +4,7 @@ set multiplot layout 1,2
 #LOGSPACE
 set xlabel "Time [days]"; set ylabel "Log(activity) [a.u.]"
 set title "Log space"
-plot "out.txt" index 1 using 1:2:3 with errorbars title "Raw",\
+plot cos(x),\
 "out.txt" index 2 using 1:2 with lines title "Best",\
 "out.txt" index 2 using 1:3 with lines title "Upper",\
 "out.txt" index 2 using 1:4 with lines title "Lower"
