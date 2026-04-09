@@ -20,9 +20,14 @@ namespace pp{
         vector(std::initializer_list<double> list) : data(list) {}
         vector(const vector&) = default; // Copy
         vector(vector&&) noexcept = default; //move
+   
 
         vector& operator=(const vector&) = default;     // Copy assignment
         vector& operator=(vector&&) noexcept = default; //Move assignment
+
+        vector(const std::vector<double>& v) : data(v) {} // copy constructor from std::vector
+
+
     
 
         inline int size() const {return data.size();} //inline function to gain vector size
@@ -110,7 +115,7 @@ namespace pp{
         //Constructors
         std::vector<pp::vector> cols;
         matrix()=default;
-        matrix(int m,int n) : cols(n, pp::vector(m)) {} //make a matrix of m std::vectors each containing a pp::vector that is n long.
+        matrix(int m,int n) : cols(n, pp::vector(m)) {} //make a matrix of n std::vectors each containing a pp::vector that is m long.
         matrix(const matrix& other)=default;  //copy make
         matrix(matrix&& other)=default;        //move make
         matrix& operator=(const matrix& other)=default; //copy overwrite
@@ -147,9 +152,6 @@ namespace pp{
                 R[j,i]=(*this)[i,j];
             return R;
         }
-
-        double get (int i, int j) {return cols[j][i];}
-        void set(int i, int j, double value){cols[j][i] = value;}
 
         vector get_col(int j) {return (*this)[j];}
 
