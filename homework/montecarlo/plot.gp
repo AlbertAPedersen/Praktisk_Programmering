@@ -4,14 +4,10 @@ set output "plot.svg"
 set xlabel "1/sqrt(N)"; set ylabel "Error"
 set grid
 
-//FIT AND R2 ADDED BY AI
+#FIT AND R2 ADDED BY AI
 stats "out.txt" index 0 using 4 name "Y" nooutput
-
 f(x) = m*x + b
 fit f(x) "out.txt" index 0 using 1:4 via m, b
-
-# FIT_WSSR is the Sum of Squared Residuals from the fit
-# (Y_stddev**2 * Y_records) is the Total Sum of Squares
 SSE = FIT_WSSR
 SST = (Y_stddev**2) * Y_records
 R2 = 1.0 - (SSE/SST)

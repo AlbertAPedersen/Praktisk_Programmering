@@ -24,6 +24,53 @@ namespace pp{
         }
         
     }; //lcg
+    struct halton{
+        int n;
+        int b;
+        int dim;
+
+        double corput(int n,int b=2){
+            double q=0.0;
+            double bk=1.0/b;
+            while (n>0){
+                q+= n % b * bk;
+                n/=b;
+                n=floor(n);
+                bk/=b;
+            } 
+            return q;
+    }
+    std::vector<int> prime_numbers(int n){
+        std::vector<int> primes{};
+        int candidate=2;
+        while (primes.size()<n){
+            bool candidate_is_prime=true;
+            for (int p=0; p<primes.size();p++){
+                if (p*p>candidate) break;
+                if (candidate%primes[p]==0){
+                    candidate_is_prime=false;
+                    break;
+                }
+            }
+            if (candidate_is_prime){
+                primes.push_back(candidate);
+            }
+                candidate+=1;
+            }
+    return primes;
+    }
+    matrix sequence(int dim, int n){
+        std::vector<int> bases=prime_numbers(dim);
+        matrix output = matrix();
+        for (b=0;b<bases.size();b++){
+            output[b]=corput(n,bases[b]);
+        }
+        return output;
+    }
+    
+
+};//Halton
+
 
 std::vector<double> plainmc(
     std::function<double(const std::vector<double>&)> f,
