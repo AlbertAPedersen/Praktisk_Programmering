@@ -6,6 +6,9 @@
 #include<initializer_list>
 #include"../packages/matrix_QR.h"
 #include<functional>
+#include<cstdlib>
+
+
 namespace pp{
     struct lcg{
         long long a;
@@ -24,6 +27,8 @@ namespace pp{
         }
         
     }; //lcg
+
+
     struct halton{
         int n;
         int b;
@@ -59,11 +64,15 @@ namespace pp{
             }
     return primes;
     }
-    matrix sequence(int dim, int n){
+
+    std::vector<std::vector<double>> sequence(int dim, int n){
         std::vector<int> bases=prime_numbers(dim);
-        matrix output = matrix();
+
+        std::vector<std::vector<double>> output(dim);
         for (b=0;b<bases.size();b++){
-            output[b]=corput(n,bases[b]);
+            for (int i=0; i<n; i++){
+            output[b].push_back(corput(i,bases[b]));
+            }
         }
         return output;
     }
@@ -77,7 +86,9 @@ std::vector<double> plainmc(
     std::vector<double>& a, 
     std::vector<double>& b, 
     int N,
-    pp::lcg& gen){
+    pp::lcg& gen,
+    bool C_rand) //This bool makes me able to override the lcg gen for the c++ random number generator.. Not pretty but it works.
+    {
         int dim = a.size();
         double V = 1;
         for (int i=0; i<dim;i++){
@@ -86,18 +97,57 @@ std::vector<double> plainmc(
         double sum1 = 0.0;
         double sum2 = 0.0;
         std::vector<double> x(dim);
-
-        for (int j=0; j<N;j++){
-            for (int i=0; i<dim;i++){
-                x[i] = a[i] + gen.call() * (b[i]-a[i]);
+        if (C_rand){
+            for (int j=0; j<N;j++){
+                for (int i=0; i<dim;i++){
+                    double random_value= static_cast<double>(std::rand()) / static_cast<double>(RAND_MAX);
+                    x[i] = a[i] + random_value * (b[i]-a[i]); 
+                }
+                double fx = f(x);
+                sum1 += fx; 
+                sum2 += fx * fx;
             }
-            double fx = f(x);
-            sum1 += fx; 
-            sum2 += fx * fx;
         }
+        else{
+            for (int j=0; j<N;j++){
+                for (int i=0; i<dim;i++){
+                    x[i] = a[i] + gen.call() * (b[i]-a[i]);
+                }
+
+                double fx = f(x);
+                sum1 += fx; 
+                sum2 += fx * fx;
+            }
+        }
+
         double mean = sum1 / N;
         double sigma = std::sqrt(sum2 / N - mean * mean);
     return {mean * V, sigma * V / std::sqrt(N)};
+    }; //C_rand
+    
+
+std::vector<double> quasimc(
+    const std::function<double(const std::vector<double>&)> f,
+    const std::vector<double>& a, 
+    const std::vector<double>& b, 
+    const std::vector<std::vector<double>>& seq){
+        int dim = a.size();
+        double V = 1;
+        for (int i=0; i<dim;i++){
+            V *= b[i] - a[i];
+        } 
+        double sum1 = 0.0;    
+        std::vector<double> x(dim);
+        int N=seq[0].size();
+        
+        for (int j=0; j<N;j++){
+            for (int i=0; i<dim;i++){
+                x[i] = a[i] + seq[i][j] * (b[i]-a[i]);
+            }
+            sum1 += f(x);
+        }
+        double mean = sum1 / N;
+        return {mean * V, 0.0};
     }
 
 
