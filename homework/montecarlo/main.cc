@@ -54,8 +54,6 @@ const double res_B = 1.3932039296856768591842462603255;
 
 //Error estimate function (non singular)
 
-
-// 3. The smooth test function lambda
 auto test_func = [](const std::vector<double>& x) -> double {
 //f=x^2+y*z, integrates from bounds [0,1] [0,2] [0,3] to 13.0.
     return (x[0] * x[0]) + (x[1] * x[2]);

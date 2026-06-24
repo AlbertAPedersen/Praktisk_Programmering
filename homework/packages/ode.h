@@ -38,7 +38,7 @@ namespace pp{
         double min_step_size = (b-a)/1e7;
         double x=a; vector y(yinit);
         //test
-        std::cerr << "Step: " << x << " y[0]: " << y[0] << std::endl;
+        //std::cerr << "Step: " << x << " y[0]: " << y[0] << std::endl;
 
         std::vector<double> xlist; xlist.push_back(x);
         std::vector<vector> ylist; ylist.push_back(y);
@@ -53,7 +53,7 @@ namespace pp{
                 result[0]=ppxlist;
 
                 //debugging size
-                std::cerr << result.size1()<< result.size2();
+                //std::cerr << result.size1()<< " " << result.size2() << "\n";
                 
 
                 //nest columns

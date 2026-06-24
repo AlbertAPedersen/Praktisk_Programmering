@@ -83,8 +83,8 @@ int main(){
     double b=5;
     pp::vector yinit = pp::vector{2,-2};
     double hinit=0.001;
-    double acc=0.01;
-    double eps=0.01;
+    double acc=0.001;
+    double eps=0.001;
     
     // NOTE: The ODE driver outputs a matrix with columns x,y0,y1
     
@@ -117,8 +117,8 @@ int main(){
     std::cout<< "\n";
 
     hinit = 0.01;
-    acc = 0.01;
-    eps = 0.01;
+    acc = 0.00001;
+    eps = 0.00001;
     epsilon=0;
 
     yinit = pp::vector{1,-0.7};
@@ -156,8 +156,8 @@ int main(){
     a=0;
     b=T;
     hinit = 0.0001*T;
-    acc = 0.000001;
-    eps = 0.000001;
+    acc = 0.000005;
+    eps = 0.000005;
 
     yinit = pp::vector{dx1,dy1,dx2,dy2,dx3,dy3,x1,y1,x2,y2,x3,y3};
 
