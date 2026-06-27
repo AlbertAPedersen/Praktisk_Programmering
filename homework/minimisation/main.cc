@@ -3,6 +3,7 @@
 #include"../packages/matrix_QR.h"
 #include"../packages/ode.h"
 #include "../packages/roots.h"
+#include "../packages/integration.h"
 #include "min.h"
 #include<cmath>
 #include<functional>
