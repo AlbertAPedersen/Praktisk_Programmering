@@ -104,8 +104,6 @@ int main(){
 
     //Task B
 
-    
-    std::cout << "\n\n";
     //Constant values for convergence and for the ODE driver
     double E_guess=-2;
     
@@ -127,18 +125,18 @@ int main(){
         
         pp::vector solution_hydrogen = newton(aux_function,pp::vector{E_guess}, root_acc,root_alpha_min, root_max_iter);
 
-        std::cout << rmax << " " << solution_hydrogen[0] << "\n";
+        std::cerr << rmax << " " << solution_hydrogen[0] << "\n";
     }
-    std::cout << "\n\n";
+    std::cerr << "\n\n";
 
     rmax=8;
     //rmin convergence:
     for (rmin=1e-5; rmin<rmax; rmin*=5){
         pp::vector solution_hydrogen = newton(aux_function,pp::vector{E_guess}, root_acc,root_alpha_min, root_max_iter);
 
-        std::cout << rmin << " " << solution_hydrogen[0] << "\n";
+        std::cerr << rmin << " " << solution_hydrogen[0] << "\n";
     }
-    std::cout << "\n\n";
+    std::cerr << "\n\n";
 
      rmin=1e-4;
     //acc convergence
@@ -146,9 +144,9 @@ int main(){
         eps=acc;
         pp::vector solution_hydrogen = newton(aux_function,pp::vector{E_guess}, root_acc,root_alpha_min, root_max_iter);
 
-        std::cout << acc << " " << solution_hydrogen[0] << "\n";
+        std::cerr << acc << " " << solution_hydrogen[0] << "\n";
     }
-    std::cout << "\n\n";
+    std::cerr << "\n\n";
 
     // plot of E0 function, first E0 is found from converging conditions,
     //  then is is plotted using the driver to generate points
@@ -158,7 +156,9 @@ int main(){
     double E0 = solution_hydrogen[0];
     
     pp::matrix plot = pp::ode::driver(hydrogen,rmin,rmax,yinit,hinit,acc,eps);
-    plot.print();
+    for (int i=0;i<plot.size1();i++){
+        std::cerr << plot[i,0] << " " << plot[i,1] << " " << plot[i,2] << "\n";
+    }
 
 
     

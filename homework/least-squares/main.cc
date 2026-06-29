@@ -30,8 +30,8 @@ int main(){
     pp::vector y_model(time.size());
     pp::vector y_lower(time.size());
     pp::vector y_upper(time.size());
-    c.print("C");
-    SIGMA.print("SIGMA");
+    c.print("Fit coefficients");
+    SIGMA.print("Covariance matrix");
     
     for (int i=0;i<y_model.size();i++) {
         y_model[i]=c[0]-c[1]*time[i];
@@ -46,33 +46,31 @@ int main(){
     
     double halftime = std::log(2)/c[1];
     double halftime_err = std::abs(halftime*std::sqrt(SIGMA[1,1])/c[1]);
-    c.print("Coefficients");
+
 
     std::cout<<"\n"<< "Measured halftime is: " << halftime << "+-" <<halftime_err 
-    << " Days.\nActual value: 3.632 Days. The result is off by " << (halftime-3.632)/halftime_err <<" standard deviations"; 
+    << " Days.\nActual value: 3.632 Days. The result is off by " << (halftime-3.632)/halftime_err <<" standard deviations \n"; 
     
     //output for plotting
-    
-    std::cout<< "\n\n\n"; // GNU block
     for (int i=0;i<time.size();i++){
-        std::cout << time[i] << " " << lnactivity[i] << " "<< lnuncertainty[i] <<"\n" ; // Raw values
+        std::cerr << time[i] << " " << lnactivity[i] << " "<< lnuncertainty[i] <<"\n" ; // Raw values
     }
 
-    std::cout<< "\n\n\n"; // GNU block
+    std::cerr<< "\n\n\n"; // GNU block
     for (int i=0;i<time.size();i++){
-        std::cout << time[i] << " " << y_model[i] << " " 
+        std::cerr << time[i] << " " << y_model[i] << " " 
         << y_lower[i] << " " << y_upper[i] << "\n"; // Fitted values
     } 
 
 
-    std::cout<< "\n\n\n"; // GNU block
+    std::cerr<< "\n\n\n"; // GNU block
     for (int i=0;i<time.size();i++){
-        std::cout << time[i] << " " << activity[i] << " "<< uncertainty[i] <<"\n" ; // Raw values
+        std::cerr << time[i] << " " << activity[i] << " "<< uncertainty[i] <<"\n" ; // Raw values
     }
 
-    std::cout<< "\n\n\n"; // GNU block
+    std::cerr<< "\n\n\n"; // GNU block
     for (int i=0;i<time.size();i++){
-        std::cout << time[i] << " " << std::exp(y_model[i]) << " " 
+        std::cerr << time[i] << " " << std::exp(y_model[i]) << " " 
         << std::exp(y_lower[i]) << " " << std::exp(y_upper[i]) << "\n"; // Fitted values
     } 
 

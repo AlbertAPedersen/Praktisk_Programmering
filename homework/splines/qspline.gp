@@ -14,7 +14,7 @@ set title "Task B plot 1"
 set grid
 plot "out.txt" index 2 using 1:2 with points title "Table value",\
 "out.txt" index 3 using 1:2 with lines title "Interpolated value",\
-"out.txt" index 3 using 1:3 with lines title "Interpolated derivative",\
+"out.txt" index 3 using 1:3 with lines lw 2 linecolor rgb "red" title "Interpolated derivative",\
 "out.txt" index 3 using 1:4 with lines title "Interpolated Integral"
 
 set xlabel "X"; set ylabel "Y"

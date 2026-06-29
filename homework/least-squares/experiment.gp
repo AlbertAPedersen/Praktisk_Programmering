@@ -4,17 +4,17 @@ set multiplot layout 1,2
 #LOGSPACE
 set xlabel "Time [days]"; set ylabel "Log(activity) [a.u.]"
 set title "Log space"
-plot cos(x),\
-"out.txt" index 2 using 1:2 with lines title "Best",\
-"out.txt" index 2 using 1:3 with lines title "Upper",\
-"out.txt" index 2 using 1:4 with lines title "Lower"
+plot\
+"log" index 1 using 1:2 with lines title "Best",\
+"log" index 1 using 1:3 with lines title "Upper",\
+"log"  index 1 using 1:4 with lines title "Lower"
 
 #Linearspace
 set xlabel "Time [days]"; set ylabel "activity [a.u.]"
 set title "Linear space"
-plot "out.txt" index 3 using 1:2:3 with errorbars title "Raw",\
-"out.txt" index 4 using 1:2 with lines title "Best",\
-"out.txt" index 4 using 1:3 with lines title "Upper",\
-"out.txt" index 4 using 1:4 with lines title "Lower"
+plot "log"  index 2 using 1:2:3 with errorbars title "Raw",\
+"log"  index 3 using 1:2 with lines title "Best",\
+"log"  index 3 using 1:3 with lines title "Upper",\
+"log"  index 3 using 1:4 with lines title "Lower"
 
 unset multiplot

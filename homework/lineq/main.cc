@@ -20,6 +20,7 @@ Task A
     pp::matrix R2=decomp2.R;
     Q2.print("Matrix Q:");
     R2.print("Matrix R:");
+    std::cout << "\n\n";
     //test transpose QtQ=1
     pp::matrix QtQ2=Q2.transpose()*Q2;
     //QtQ.print("QtQ");
@@ -35,10 +36,11 @@ Task A
     std::cout<< "approx(I4,QtQ) returns "<< pp::approx(I2,QtQ2) <<"\n";
 
 
-    std::cout<< "Task A3 with 7x7" <<"\n";
+    std::cout<< "\nTask A3 with A=7x7 matrix and b=7x1 vector (random)" <<"\n";
 
     pp::matrix A3 = pp::randommatrix(7,7);
     pp::vector b3 = pp::randomvec(7);
+    A3.print("A3 matrix");
     pp::QR decomp3(A3);
     pp::matrix Q3=decomp3.Q;
     pp::matrix R3=decomp3.R;
@@ -48,23 +50,22 @@ Task A
     std::cout<< "approx(b, A*x) returns "<<pp::approx(b3,A3*x3)<<"\n";
     //R3.print();
 
-    std::cout<< "Task A4" <<"\n";
+    std::cout<< "\nTask A4" <<"\n\n";
     std::cout<< "Det(R) returns" << decomp3.det() << "\n";
 
 /*
 Task B
 Uses same square matrix as A3 for the inverse (7x7)
 */
-    std::cout<< "Task B"<<"\n";
+    std::cout<< "Task B, same matrix as A3 used (7x7)"<<"\n";
     
     pp::matrix A3_inv = decomp3.inverse();
 
     pp::matrix prod = A3_inv*A3;
     pp::matrix I7(7,7);
     I7.setid();
-    prod.print();
+    prod.print("A*B:");
     std::cout<< "approx(I7,A3_inv*A3) returns " << pp::approx(I7,A3_inv*A3) << "\n";
-
 
 /*
 Task C
@@ -79,5 +80,6 @@ Task C
         pp::QR datum(A);
     }
 
+std::cout << "\n Fit is shown in plot.svg. It is approximately 3rd order\n";
 return 0;
 }

@@ -8,6 +8,7 @@ LOGS := $(Ns:%=log.%)
 
 
 all : outtimes.txt scaling.svg
+	@echo "Check plot.svg"
 
 scaling.svg: outtimes.txt scaling.gp
 #Silent fitting
@@ -17,9 +18,9 @@ scaling.svg: outtimes.txt scaling.gp
 benchmark:
 	@$(MAKE) clean
 	@echo "Benchmark results:\n" -o benchmark_results.txt 
-	@/usr/bin/time -o benchmark_results.txt -f"Single thread elapsed:%e  User:%U" $(MAKE) -j1 
+	@/usr/bin/time -o benchmark_results.txt -f"Single thread elapsed time:%e  User:%U" $(MAKE) -j1 
 	@$(MAKE) clean
-	@/usr/bin/time -a -o benchmark_results.txt -f"8 threads elapsed:%e  User:%U" $(MAKE) -j8
+	@/usr/bin/time -a -o benchmark_results.txt -f"8 threads elapsed time:%e  User:%U" $(MAKE) -j8
 	@cat benchmark_results.txt
 
 

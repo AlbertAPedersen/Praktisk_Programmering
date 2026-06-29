@@ -1,6 +1,8 @@
 set terminal svg background "white" size 800,600
 set xlabel "Size [n]"; set ylabel "Time [s]"
 set title "Scaling of Jabobi algorithm"
+set fit quiet
+
 a=5e-10; b=3; \
 f(x) = a * x**b;\
 fit f(x) "outtimes.txt" using 1:3 via a,b;\

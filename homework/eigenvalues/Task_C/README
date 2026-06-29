@@ -1,3 +1,4 @@
 Running "make" will generate a scaling plot showing O(n^3)
-Running "make benchmark" will run parts of the script twice. Once with a single thread using "make -j1" and once with 8 threads using "make -j8".
+Running "make benchmark" will run parts of the script twice. Once with a single thread using "make -j1" and once with 8 threads using "make -j8". 
+The number of threads used may need to be changed on other hardware in the Makefile.
 The times for the benchmark will then be sent to "benchmark_results", showing that parallel computing is faster.

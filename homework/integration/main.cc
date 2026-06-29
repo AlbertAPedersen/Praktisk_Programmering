@@ -114,6 +114,7 @@ int main(){
 
     //ERF task
     double erf_1_tab =  0.84270079294971486934;
+    std::cout << "Acc used      " << " Absolut error \n";
     for (int i=1; i<16; i++){
         double a = std::pow(10,i);
         eps=0.0;
@@ -160,20 +161,20 @@ int main(){
     pp::vector C1 = pp::CC_integrate(fC_1,-4,4,acc,eps);
     double C1_python = 0.17138676205825268;
     double diff_C1 = std::abs(C1[0]-C1_python);
-    std::cout << "sin(x^10) from -4 to 4, eps,acc=1e7: " << C1[0] << " +- " << C1[1]
+    std::cout << "sin(x^10) from -4 to 4, eps,acc=1e-7: " << C1[0] << " +- " << C1[1]
               << "\n Actual error compared to value from scipy.quad: " << diff_C1<< "\n\n";
 
 
     pp::vector C2 = pp::CC_integrate(fC_2,0,1,acc,eps);
     double C2_python = 0.5024347471020827;
     double diff_C2 = std::abs(C2[0]-C2_python);
-    std::cout << "sin(1/x) from 0 to 1, eps,acc=1e7: " << C2[0] << " +- " << C2[1]
+    std::cout << "sin(1/x) from 0 to 1, eps,acc=1e-7: " << C2[0] << " +- " << C2[1]
               << "\n Actual error compared to value from scipy.quad: " << diff_C2<< "\n\n";
 
     pp::vector C3 = pp::CC_integrate(fC_3,0,1,acc,eps);
     double C3_python = -0.08023582237622202;
     double diff_C3 = std::abs(C3[0]-C3_python);
-    std::cout << "sin(10000/x) from 0 to 1, eps,acc=1e7: " << C3[0] << " +- " << C3[1]
+    std::cout << "sin(10000/x) from 0 to 1, eps,acc=1e-7: " << C3[0] << " +- " << C3[1]
               << "\n Actual error compared to value from scipy.quad: " << diff_C3<< "\n";
     
 

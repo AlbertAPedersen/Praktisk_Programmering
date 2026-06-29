@@ -5,7 +5,7 @@ LDLIBS += -lstdc++ -lm #Links libraries that are already linked
 packages = ../packages/matrix_QR.h ../packages/min.h ann.h 
 
 all : out.txt plot.svg	
-	cat out.txt 
+	@echo "check plot.svg"
 
 plot.svg : out.txt plot.gp
 	gnuplot plot.gp > plot.svg	
@@ -20,4 +20,4 @@ main.o : main.cc $(packages) Makefile
 	$(CXX) $(CXXFLAGS) -c main.cc -o main.o
 
 clean : 
-	$(RM) main *.o out.txt *.svg
+	$(RM) main *.o *out.txt *.svg *log

@@ -55,7 +55,7 @@ const double res_B = 1.3932039296856768591842462603255;
 //Error estimate function (non singular)
 
 auto test_func = [](const std::vector<double>& x) -> double {
-//f=x^2+y*z, integrates from bounds [0,1] [0,2] [0,3] to 13.0.
+//f=x^2+y*z, integrates from bounds [0,1] [0,2] [0,3] to 11.0.
     return (x[0] * x[0]) + (x[1] * x[2]);
 };
 double test_value = 11.0; 
@@ -83,14 +83,14 @@ for (int k = 0; k < K; ++k) {
     int N = static_cast<int>(std::round(1.0 / (x*x)));
 
     auto area = pp::plainmc(circle, a, b, static_cast<int>(N), RNG, 0);
-    std::cout << 1.0 / std::sqrt(N) << " " 
+    std::cerr << 1.0 / std::sqrt(N) << " " 
               << area[0] << " " 
               << area[1] << " " 
               << std::abs(area[0] - PI) << "\n";
 }
 
 //GNU BLOCK
-std::cout << "\n\n Ellipsoid\n";
+std::cerr << "\n\n\n";
 
 //ELLIPSOID
 double area_true = 4.0/3.0*PI*1*2*3;
@@ -100,13 +100,13 @@ long long N=1000000;
 
 
 auto area = pp::plainmc(ellipsoid, a, b, static_cast<int>(N), RNG,0);
-std::cout << "N: " << N 
-            << " Area :"<< area[0]
+std::cout << "\nEllipsiod \nN: " << N 
+            << " Area: "<< area[0]
             << " Estimated error: " << area[1]
             <<" Actual error: " << std::abs(area[0]-area_true) << "\n";
 
 //TASK B
-std::cout << "\n\n";
+std::cerr << "\n\n";
 
 pp::halton h; // Initialize struct
 
@@ -119,14 +119,14 @@ for (int N = 100; N < 100000; N*=1.2) {
     std::vector<std::vector<double>> halton_seq = h.sequence(3,N);
     auto quasi_result = pp::quasimc(integral, a, b, halton_seq);
     auto plain_result = pp::plainmc(integral, a, b, static_cast<int>(N), RNG, 0);
-    std::cout << 1.0 / std::sqrt(N) << " " 
+    std::cerr << 1.0 / std::sqrt(N) << " " 
               << quasi_result[0] << " " 
               << std::abs(quasi_result[0]-res_B)/res_B << " " 
               << plain_result[0] << " " 
               << std::abs(plain_result[0]-res_B)/res_B << "\n";
 }
 
-std::cout << "\n\n";
+std::cerr << "\n\n";
 
 a = {0,0,0};
 b= {1,2,3};
@@ -138,7 +138,7 @@ for (int N = 100; N < 100000; N*=1.2) {
     auto plain_result = pp::plainmc(test_func, a, b, static_cast<int>(N), RNG, 0);
     auto C_RNG_result = pp::plainmc(test_func, a, b, static_cast<int>(N), RNG, 1);
 
-    std::cout << 1.0 / std::sqrt(N) << " " 
+    std::cerr << 1.0 / std::sqrt(N) << " " 
               << std::abs(quasi_result[0]-test_value)/test_value << " " 
               << std::abs(plain_result[0]-test_value)/test_value << " "
               << std::abs(C_RNG_result [0]-test_value)/test_value << "\n";

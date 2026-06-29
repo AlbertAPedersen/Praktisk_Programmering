@@ -3,7 +3,7 @@
 #include"../packages/matrix_QR.h"
 #include"../packages/ode.h"
 #include "../packages/roots.h"
-#include "../packages/integration.h"
+#include "../packages/integrate.h"
 #include "min.h"
 #include<cmath>
 #include<functional>
@@ -111,15 +111,18 @@ int main(){
     }
 
         std::cout <<"\n\n";
-    for (int i=0;i<E.size();i++){
-            std::cout << E[i] << " " << Breit_Wigner(E[i], params[0], params[1],params[2]) << "\n";
+    for (int i=102;i<159;i++){
+        double E = static_cast<double>(i);
+            std::cout << E << " " << Breit_Wigner(E, params[0], params[1],params[2]) << "\n";
     }
 
     std::cout <<"\n\n";
-    for (int i=0;i<E.size();i++){
-            std::cout << E[i] << " " << Breit_Wigner(E[i], params_central[0], params_central[1],params_central[2]) << "\n";
+    for (int i=102;i<159;i++){
+        double E = static_cast<double>(i);
+            std::cout << E << " " << Breit_Wigner(E, params_central[0], params_central[1],params_central[2]) << "\n";
     }
 
+    std::cout << "\n\nHimmelblau, rosenbruck minina and Higgs parameters for central and forward at the top of out.txt (Likely in terminal as well)\n";
 
 
     return 0;

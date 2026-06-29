@@ -6,6 +6,7 @@ packages = ../homework/packages/matrix_QR.h ode.h
 
 all : out.txt plot.svg log	
 	cat log 
+	@echo "See plot.svg"
 
 plot.svg : out.txt plot.gp
 	gnuplot plot.gp > plot.svg	

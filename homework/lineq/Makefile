@@ -5,7 +5,7 @@ LDLIBS += -lstdc++ -lm #Links libraries that are already linked
 
 all : out.txt times.txt plot.svg
 	cat out.txt
-	cat times.txt
+
 
 plot.svg : times.txt Makefile
 	echo '\
@@ -14,6 +14,7 @@ plot.svg : times.txt Makefile
 	set xlabel "Matrix Size (N)";\
 	set ylabel "Time (seconds)";\
 	set title "QR Decomposition of NxN";\
+	set fit quiet;\
 	a=5e-10; b=3; \
 	f(x) = a * x**b;\
 	fit f(x) "times.txt" using 1:2 via a,b;\
@@ -30,7 +31,7 @@ times.txt : main
 	> $@
 	for N in $$(seq 100 100 2200); do \
 		time --format "$$N %e" --output $@ --append \
-		./$< -size $$N 1>out ;\
+		./$< -size $$N 1>log ;\
 	done 
 
 
@@ -41,4 +42,4 @@ main.o : main.cc matrix_QR.h Makefile
 	$(CXX) $(CXXFLAGS) -c main.cc -o main.o
 
 clean : 
-	$(RM) main *.o out.txt plot.svg times.txt
+	$(RM) main *.o out.txt plot.svg times.txt out fit.log

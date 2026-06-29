@@ -11,7 +11,7 @@ plot.svg : out.txt plot.gp
 	gnuplot plot.gp > plot.svg	
 
 out.txt : main
-	./main > out.txt
+	./main 1> out.txt 2>log
 
 main : main.o
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDLIBS)
@@ -20,4 +20,4 @@ main.o : main.cc $(packages) Makefile
 	$(CXX) $(CXXFLAGS) -c main.cc -o main.o
 
 clean : 
-	$(RM) main *.o out.txt *.svg
+	$(RM) main *.o out.txt *.svg log

@@ -5,6 +5,7 @@ Number of calls: 52 integral value A_3: 0.785406
 Number of calls: 1040 integral value A_4: -3.99981
 
  
+Acc used       Absolut error 
 0.100000000000000006 0.000190425305661601
 0.010000000000000000 0.000190425305661601
 0.001000000000000000 0.000029165537483777
@@ -35,11 +36,11 @@ Python quad with same acc and eps with -INF to INF gave 390 calls with 2e-16 err
 
  
  TASK C
-sin(x^10) from -4 to 4, eps,acc=1e7: 0.298724858140970495 +- 0.000139331722022862
+sin(x^10) from -4 to 4, eps,acc=1e-7: 0.298724858140970495 +- 0.000139331722022862
  Actual error compared to value from scipy.quad: 0.127338096082717817
 
-sin(1/x) from 0 to 1, eps,acc=1e7: 0.504064788756243276 +- 0.000003270970831569
+sin(1/x) from 0 to 1, eps,acc=1e-7: 0.504064788756243276 +- 0.000003270970831569
  Actual error compared to value from scipy.quad: 0.001630041654160586
 
-sin(10000/x) from 0 to 1, eps,acc=1e7: -0.000065639025457812 +- 0.000084556885569653
+sin(10000/x) from 0 to 1, eps,acc=1e-7: -0.000065639025457812 +- 0.000084556885569653
  Actual error compared to value from scipy.quad: 0.080170183350764215

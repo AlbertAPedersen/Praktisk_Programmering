@@ -7,7 +7,7 @@ set logscale x
 set yrange [1e-17 : 0.001]
 set xrange [1e-16 : 2]
 set grid
-plot "out.txt" index 1 using 1:2 with lines title "Y"
+plot "out.txt" index 1 using 1:2 with lines title "error of erf(1)"
 
 
 

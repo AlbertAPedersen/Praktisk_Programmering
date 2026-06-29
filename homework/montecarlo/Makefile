@@ -11,7 +11,7 @@ plot.svg : out.txt plot.gp
 	gnuplot plot.gp > plot.svg	
 
 out.txt : main
-	./main > out.txt
+	./main 1> out.txt 2>log
 
 main : main.o
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDLIBS)

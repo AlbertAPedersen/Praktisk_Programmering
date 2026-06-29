@@ -1,11 +1,11 @@
 CXX=g++ -std=c++23  #Compiler and standard
-CXXFLAGS = -Wall -Wextra  -O1 #-Werror #Flags for debugging
+CXXFLAGS = -Wall  -O1 #-Werror #Flags for debugging
 LDLIBS += -lstdc++ -lm #Links libraries that are already linked
 
 packages = ../packages/matrix_QR.h ode.h
 
 all : out.txt plot.svg
-	cat out.txt 
+	@echo "Check plot.svg"
 
 plot.svg : out.txt plot.gp
 	gnuplot plot.gp > plot.svg	

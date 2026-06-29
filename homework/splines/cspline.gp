@@ -13,9 +13,9 @@ plot "out.txt" index 2 using 1:5 with points title "Table values",\
 set xlabel "X"; set ylabel "Y"
 set title "Task C - Gnuplot spline comparison"
 set grid
-plot "out.txt" index 2 using 1:5 with points title "Table values",\
-"out.txt" index 6 using 1:2 with lines title "Interpolated value",\
-"out.txt" index 2 using 1:5 smooth csplines title "gnuplot spline" with lines
+plot "out.txt" index 2 using 1:5 with points pointsize 2 title "Table values",\
+"out.txt" index 6 using 1:2 with lines lw 4 title "Interpolated value",\
+"out.txt" index 2 using 1:5 smooth csplines lw 2 dt 2 linecolor rgb "black" title "gnuplot spline" with lines
 
 unset multiplot
 

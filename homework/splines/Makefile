@@ -5,8 +5,7 @@ LDLIBS += -lstdc++ -lm #Links libraries that are already linked
 packages = ../packages/matrix_QR.h spline.h
 
 all : out.txt qspline.svg cspline.svg
-	cat out.txt
-
+	@echo "Check .svg files"
 qspline.svg :  qspline.gp out.txt
 	gnuplot qspline.gp > qspline.svg
 
