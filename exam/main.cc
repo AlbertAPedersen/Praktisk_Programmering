@@ -31,7 +31,9 @@ std::function<pp::vector(double)> analytical_harmonic = [](double x){
 };
 
 
-void output(std::function<pp::vector(double,pp::vector)> f,
+void output(
+    //Outputs data suitable for a plot with different possible settings
+    std::function<pp::vector(double,pp::vector)> f,
     double a, double b, double hinit,
     pp::vector yinit,
     bool two_step,
@@ -67,8 +69,6 @@ void output(std::function<pp::vector(double,pp::vector)> f,
     std::cout << "\n\n";
 }
 
-
-
 int main(){
     double a=0;
     double b=10;
@@ -79,9 +79,8 @@ int main(){
     bool two_step = true;
     bool correction_status = false;
 
-    // NOTE: The ODE driver outputs a matrix with columns x,y0,y1
+    // NOTE: The ODE driver outputs a matrix with columns x,y0,y1 (x,y,y')
     output(harmonic,a,b,hinit,yinit,two_step,correction_status,acc,eps);
-
     correction_status=true;
     output(harmonic,a,b,hinit,yinit,two_step,correction_status,acc,eps);
     two_step=0;
