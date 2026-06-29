@@ -1,0 +1,7 @@
+Fit coefficients 4.95808 0.170369 
+Covariance matrix
+ 0.0012524 0.00019667 
+0.00019667  5.105e-05 
+
+Measured halftime is: 4.0685+-0.170624 Days.
+Actual value: 3.632 Days. The result is off by 2.55824 standard deviations 

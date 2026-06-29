@@ -1,0 +1,6 @@
+Himmelblau local max -0.270844 -0.92304 
+Himmelblau local min1 -2.80512 3.13131 
+Himmelblau local min2 3 2.00001 
+Himmelblau local min3 -3.77931 -3.28319 
+Himmelblau local min4 3.58443 -1.84813 
+Rosenbruck min 0.999369 0.998715 

@@ -2866,3 +2866,37 @@ correlation matrix of the fit parameters:
                 m      b      
 m               1.000 
 b              -0.877  1.000 
+
+
+*******************************************************************************
+Mon Jun 29 22:56:53 2026
+
+
+FIT:    data read from "log" index 0 using 1:4
+        format = x:z
+        #datapoints = 100
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = m*x + b
+fitted parameters initialized with current variable values
+
+   4 3.5316064156e-01  -3.59e-06  7.08e-05    1.339533e+00  -2.153615e-03
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.353161
+rel. change during last iteration : -3.58672e-11
+
+degrees of freedom    (FIT_NDF)                        : 98
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0600307
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00360368
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+m               = 1.33953          +/- 0.2126       (15.87%)
+b               = -0.00215362      +/- 0.0125       (580.5%)
+
+correlation matrix of the fit parameters:
+                m      b      
+m               1.000 
+b              -0.877  1.000 
