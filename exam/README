@@ -1,0 +1,6 @@
+The ode.h from the ODE homework was added to the folder and subsequently changed. The driver was changed such that it is possible to use cubic RK one-stepper, a two-stepper or a two-stepper with correction. 
+
+The different steppers were tested against a harmonic oscillator ODE and compared to the analytical solution. 
+The absolute error (Analytic - Solved) is plotted as well the accumulated residual (Sum of (Analytic_i-solved_i)^2) and the weighted residual (Residual/N_points) such that the residuals aren't inflated by the number of points.
+
+As I've implemented the two-stepper AND the two-stepper with correction, I reckon it deserved 10 points.
