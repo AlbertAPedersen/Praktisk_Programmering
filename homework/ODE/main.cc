@@ -104,10 +104,10 @@ int main(){
 
     // TASK B
     a=0.0;
-    b=40*3.14;
+    b=20*3.14;
     yinit = pp::vector{1,0};
     hinit = 0.01;
-    acc = 0.00001;
+    acc = 0.000001;
     eps = 0.000001;
     epsilon=0;
 
@@ -117,16 +117,16 @@ int main(){
     std::cout<< "\n";
 
     hinit = 0.01;
-    acc = 0.00001;
-    eps = 0.00001;
+    acc = 0.0001;
+    eps = 0.0001;
     epsilon=0;
 
-    yinit = pp::vector{1,-0.7};
+    yinit = pp::vector{1,-0.6};
     pp::matrix result_orbit_2 = pp::ode::driver(orbit,a,b,yinit,hinit,acc,eps);
     result_orbit_2.print();
     std::cout<< "\n";
 
-    yinit = pp::vector{1,-0.7};
+    yinit = pp::vector{1,-0.6};
     epsilon=0.04;
     pp::matrix result_orbit_3 = pp::ode::driver(orbit,a,b,yinit,hinit,acc,eps);
     result_orbit_3.print();
@@ -156,8 +156,8 @@ int main(){
     a=0;
     b=T;
     hinit = 0.0001*T;
-    acc = 0.000005;
-    eps = 0.000005;
+    acc = 0.00005;
+    eps = 0.00005;
 
     yinit = pp::vector{dx1,dy1,dx2,dy2,dx3,dy3,x1,y1,x2,y2,x3,y3};
 
